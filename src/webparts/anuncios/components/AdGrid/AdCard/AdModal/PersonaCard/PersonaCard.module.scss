@@ -1,0 +1,37 @@
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore";
+
+.personaCard {
+  p,
+  h1 {
+    display: flex;
+    align-items: center;
+  }
+
+  .container {
+    @include ms-depth-4;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 5px;
+
+    hr {
+      margin: 0;
+      border-top: 1px solid rgba(128, 128, 128, 0.5);
+    }
+
+    .persona,
+    .actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .persona {
+      padding: 15px;
+      overflow-x: auto;
+    }
+
+    .actions {
+      padding: 5px;
+      flex-wrap: wrap;
+    }
+  }
+}

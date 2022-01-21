@@ -1,0 +1,103 @@
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore";
+
+.card {
+  .container {
+    @include ms-depth-4;
+    cursor: pointer;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    border-radius: 5px;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    display: grid;
+    grid-template-areas:
+      "image"
+      "body";
+    grid-template-rows: 10rem auto;
+    grid-template-columns: auto;
+    overflow: hidden;
+
+    p,
+    h1 {
+      margin: 0 !important;
+      display: flex;
+      align-items: center;
+    }
+
+    .image {
+      grid-area: image;
+      width: 100%;
+      height: 100%;
+      background-color: grey;
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+    }
+
+    .body {
+      grid-area: body;
+      padding: 10px;
+      display: grid;
+      grid-template-areas:
+        "category price"
+        "title title"
+        "description description"
+        "persona persona";
+      grid-template-rows: 1rem 2rem 3.3rem 40px;
+      grid-template-columns: auto;
+      overflow: hidden;
+      gap: 7px;
+
+      .title {
+        grid-area: title;
+        @include ms-fontSize-20;
+        @include ms-fontWeight-bold;
+        line-height: 2rem;
+        max-height: 2rem;
+        -webkit-box-orient: vertical;
+        display: block;
+        display: -webkit-box;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+      }
+
+      .description {
+        grid-area: description;
+        width: 100%;
+        @include ms-fontSize-14;
+        line-height: 1.1rem;
+        max-height: 3.3rem;
+        -webkit-box-orient: vertical;
+        display: block;
+        display: -webkit-box;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+      }
+
+      .price {
+        grid-area: price;
+        @include ms-fontSize-12;
+        display: flex;
+        justify-content: right;
+        color: "[theme: themePrimary, default: #000000]";
+        @include ms-fontWeight-semibold;
+      }
+
+      .category {
+        grid-area: category;
+        @include ms-fontSize-12;
+        @include ms-fontWeight-semibold;
+        color: "[theme: themeSecondary, default: #000000]";
+      }
+
+      .persona {
+        grid-area: persona;
+      }
+    }
+  }
+
+  .container:hover {
+    @include ms-depth-16;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+  }
+}

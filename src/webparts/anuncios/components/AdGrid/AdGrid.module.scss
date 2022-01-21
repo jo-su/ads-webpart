@@ -1,0 +1,52 @@
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+@import "~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore";
+
+.grid {
+  @include ms-Grid;
+
+  .row {
+    @include ms-Grid-row;
+  }
+
+  .column {
+    @include ms-Grid-col;
+    @include ms-sm12;
+    @include ms-md12;
+    @include ms-lg6;
+    @include ms-xxl4;
+  }
+}
+
+.emptyGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    max-width: 550px;
+    padding: 2rem;
+    margin: 5px 10px;
+    @include ms-depth-4;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    border-radius: 5px;
+
+    .icon {
+      color: "[theme: themeSecondary, default: #000000]";
+      @include ms-fontSize-42;
+      margin: 0 0 1rem 0;
+    }
+
+    .label {
+      @include ms-fontSize-24;
+      @include ms-fontWeight-semibold;
+      margin: 0 0 5px 0;
+      text-align: center;
+    }
+
+    .help {
+      @include ms-fontSize-16;
+      margin: 0;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "1-13-1-mecano-3",
+    "id": "8ab6db74-921a-450a-bfb8-6ae7b730506c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    //"skipFeatureDeployment": true,
+    "developer": {
+      "name": "Josu Garralda",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.13.1"
+    }
+  },
+  "paths": {
+    "zippedPackage": "solution/mecano-3.sppkg"
+  }
+}

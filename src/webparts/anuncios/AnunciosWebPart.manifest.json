@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "639a7628-d685-4eb0-96c8-6df833202007",
+  "alias": "AnunciosWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": { "default": "Other" },
+      "title": {
+        "default": "Ads",
+        "en-US": "Ads",
+        "es-ES": "Anuncios",
+        "eu-ES": "Iragarkiak"
+      },
+      "description": {
+        "default": "List that shows employee ads",
+        "en-US": "List that shows employee ads",
+        "es-ES": "Lista que contiene los anuncios de los empleados",
+        "eu-ES": "Langileen iragarkiak erakusten dituen zerrenda"
+      },
+      "officeFabricIconFontName": "Boards",
+      "properties": {
+        "listId": "",
+        "itemsPerPage": 6,
+        "defaultImage": ""
+      }
+    }
+  ]
+}
