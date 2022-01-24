@@ -8,6 +8,7 @@ import { WebPartContext } from '@microsoft/sp-webpart-base';
 import { SPHttpClient } from '@microsoft/sp-http';
 import { IDropdownOption, initializeIcons } from '@fluentui/react';
 import { Placeholder } from "@pnp/spfx-controls-react/lib/Placeholder";
+import { PnPClientStorage } from "@pnp/common";
 import AdToolbar from './AdToolbar';
 import AdGrid from './AdGrid';
 
@@ -26,6 +27,8 @@ const Anuncios: FunctionComponent<IAnunciosProps> = ({listId, itemsPerPage, defa
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const storage = new PnPClientStorage();
 
   function getApiUrl(category: IDropdownOption, more: boolean): { items: string; count?: string } {
     if (more){
@@ -60,19 +63,32 @@ const Anuncios: FunctionComponent<IAnunciosProps> = ({listId, itemsPerPage, defa
           dispatch({ type: "FETCH_ITEMS"});
         }
       }
-      const resp = await context.spHttpClient.get(getApiUrl(category, more).items, SPHttpClient.configurations.v1);
-      const obj = await resp.json();
+      const apiUrl  = getApiUrl(category, more);
+      const obj = await storage.local.getOrPut(apiUrl.items, ()=>getItemsFromApi(apiUrl.items), addMinutesToCurrentTime(30));
       console.log('items', obj);
-
       if(more){
         dispatch({ type: "FETCH_MORE_ITEMS_SUCCESS", items: obj.value, nextLink: obj['@odata.nextLink'] });
       }else{
-        const objC = await (await context.spHttpClient.get(getApiUrl(category, more).count, SPHttpClient.configurations.v1)).json();
+        const objC = await storage.local.getOrPut(apiUrl.count, ()=>getItemCountFromApi(apiUrl.count, category), addMinutesToCurrentTime(30));
         console.log('count', objC);
-        let count = category.key !== null ? objC.value.length : objC.value;
-        dispatch({ type: "FETCH_ITEMS_SUCCESS", items: obj.value, itemCount: count, nextLink: obj['@odata.nextLink'] });
+        dispatch({ type: "FETCH_ITEMS_SUCCESS", items: obj.value, itemCount: objC, nextLink: obj['@odata.nextLink'] });
       }
     }
+  }
+
+  async function getItemsFromApi(apiUrl: string) {
+    const resp = await (await context.spHttpClient.get(apiUrl, SPHttpClient.configurations.v1)).json();
+    return Promise.resolve(resp);
+  }
+
+  async function getItemCountFromApi(apiUrl: string, category?: IDropdownOption) {
+    const objC = await (await context.spHttpClient.get(apiUrl, SPHttpClient.configurations.v1)).json();
+    return Promise.resolve(category.key !== null ? objC.value.length : objC.value);
+  }
+
+  function addMinutesToCurrentTime(minutes: number): Date {
+    let currentDate = new Date();
+    return new Date(currentDate.getTime() + minutes*60000);
   }
 
   useEffect(() => {
